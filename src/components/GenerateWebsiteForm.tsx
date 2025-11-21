@@ -60,7 +60,7 @@ export function GenerateWebsiteForm({ onGenerate }: GenerateWebsiteFormProps) {
 
     try {
       // Initialize Google Gemini AI
-      const genAI = new GoogleGenerativeAI("AIzaSyChKs7f7BKCQGgrNJXvUCjy5pBE-7jlukg");
+      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
       // Using Gemini 2.0 Flash (experimental) - Latest and fastest model
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
 
@@ -116,25 +116,25 @@ IMPORTANT COLOR REQUIREMENTS:
       // Generate custom images using Gemini AI
       setGeneratingImages(true);
       toast.info("🎨 Creating custom images with AI...", { duration: 3000 });
-      
+
       try {
         // Use Gemini 2.5 Flash to generate business-specific images
         const generatedImages = await generateBusinessImages(
           businessName,
           businessType || 'General Business',
           prompt,
-          "AIzaSyChKs7f7BKCQGgrNJXvUCjy5pBE-7jlukg"
+          import.meta.env.VITE_GEMINI_API_KEY
         );
 
         parsedSpec.generatedImages = generatedImages;
         setGeneratingImages(false);
         toast.success("✅ Custom images generated successfully!");
-        
+
       } catch (imageError) {
         console.error("Image generation error:", imageError);
         setGeneratingImages(false);
         toast.error("⚠️ Using fallback images");
-        
+
         // Use fallback images based on business type
         parsedSpec.generatedImages = {
           hero: `https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&h=1080&fit=crop&q=80`,
@@ -258,7 +258,7 @@ IMPORTANT COLOR REQUIREMENTS:
                   </>
                 )}
               </Button>
-              
+
               {/* Progress Indicator */}
               {isGenerating && (
                 <motion.div
@@ -310,15 +310,15 @@ IMPORTANT COLOR REQUIREMENTS:
                       <span className="text-[#ff6b35] text-lg">💡</span>
                       <span className="text-sm text-white">Tips for Better Results</span>
                     </div>
-                    <ChevronDown 
-                      className={`w-4 h-4 text-[#ff6b35] transition-transform ${tipsOpen ? 'rotate-180' : ''}`} 
+                    <ChevronDown
+                      className={`w-4 h-4 text-[#ff6b35] transition-transform ${tipsOpen ? 'rotate-180' : ''}`}
                     />
                   </div>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
                   <div className="mt-2 p-4 bg-black/40 border border-[#ff6b35]/20 rounded-xl">
                     <p className="text-sm text-gray-400 leading-relaxed">
-                      Be specific about your preferences! Mention colors, style (modern, vintage, minimalist), 
+                      Be specific about your preferences! Mention colors, style (modern, vintage, minimalist),
                       sections you need (gallery, booking, shop), and your target audience.
                     </p>
                   </div>
@@ -333,8 +333,8 @@ IMPORTANT COLOR REQUIREMENTS:
                       <span className="text-[#ff6b35] text-lg">🎨</span>
                       <span className="text-sm text-white">AI-Powered Images</span>
                     </div>
-                    <ChevronDown 
-                      className={`w-4 h-4 text-[#ff6b35] transition-transform ${aiImagesOpen ? 'rotate-180' : ''}`} 
+                    <ChevronDown
+                      className={`w-4 h-4 text-[#ff6b35] transition-transform ${aiImagesOpen ? 'rotate-180' : ''}`}
                     />
                   </div>
                 </CollapsibleTrigger>
@@ -418,21 +418,21 @@ IMPORTANT COLOR REQUIREMENTS:
                       <h4 className="text-lg text-white mb-3">Color Palette</h4>
                       <div className="flex gap-4">
                         <div className="flex-1">
-                          <div 
+                          <div
                             className="w-full h-20 rounded-lg mb-2"
                             style={{ backgroundColor: designSpec.primaryColor }}
                           />
                           <p className="text-sm text-gray-400">Primary: {designSpec.primaryColor}</p>
                         </div>
                         <div className="flex-1">
-                          <div 
+                          <div
                             className="w-full h-20 rounded-lg mb-2"
                             style={{ backgroundColor: designSpec.secondaryColor }}
                           />
                           <p className="text-sm text-gray-400">Secondary: {designSpec.secondaryColor}</p>
                         </div>
                         <div className="flex-1">
-                          <div 
+                          <div
                             className="w-full h-20 rounded-lg mb-2"
                             style={{ backgroundColor: designSpec.accentColor }}
                           />
@@ -450,9 +450,9 @@ IMPORTANT COLOR REQUIREMENTS:
                         </div>
                         <div className="grid grid-cols-2 gap-3">
                           <div className="relative group">
-                            <img 
-                              src={designSpec.generatedImages.hero} 
-                              alt="Hero" 
+                            <img
+                              src={designSpec.generatedImages.hero}
+                              alt="Hero"
                               className="w-full h-32 object-cover rounded-lg"
                             />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -460,9 +460,9 @@ IMPORTANT COLOR REQUIREMENTS:
                             </div>
                           </div>
                           <div className="relative group">
-                            <img 
-                              src={designSpec.generatedImages.feature1} 
-                              alt="Feature 1" 
+                            <img
+                              src={designSpec.generatedImages.feature1}
+                              alt="Feature 1"
                               className="w-full h-32 object-cover rounded-lg"
                             />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -470,9 +470,9 @@ IMPORTANT COLOR REQUIREMENTS:
                             </div>
                           </div>
                           <div className="relative group">
-                            <img 
-                              src={designSpec.generatedImages.feature2} 
-                              alt="Feature 2" 
+                            <img
+                              src={designSpec.generatedImages.feature2}
+                              alt="Feature 2"
                               className="w-full h-32 object-cover rounded-lg"
                             />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -480,9 +480,9 @@ IMPORTANT COLOR REQUIREMENTS:
                             </div>
                           </div>
                           <div className="relative group">
-                            <img 
-                              src={designSpec.generatedImages.feature3} 
-                              alt="Feature 3" 
+                            <img
+                              src={designSpec.generatedImages.feature3}
+                              alt="Feature 3"
                               className="w-full h-32 object-cover rounded-lg"
                             />
                             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
@@ -510,7 +510,7 @@ IMPORTANT COLOR REQUIREMENTS:
                       <h4 className="text-lg text-white mb-3">Website Sections</h4>
                       <div className="flex flex-wrap gap-2">
                         {designSpec.sections.map((section, idx) => (
-                          <span 
+                          <span
                             key={idx}
                             className="px-3 py-1 bg-[#ff6b35]/20 border border-[#ff6b35]/40 rounded-full text-sm text-gray-300"
                           >
@@ -525,7 +525,7 @@ IMPORTANT COLOR REQUIREMENTS:
                       <h4 className="text-lg text-white mb-3">Key Features</h4>
                       <div className="grid grid-cols-2 gap-3">
                         {designSpec.features.map((feature, idx) => (
-                          <div 
+                          <div
                             key={idx}
                             className="p-3 bg-black/40 rounded-lg border border-gray-700 text-sm text-gray-300"
                           >
