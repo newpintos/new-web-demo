@@ -1,0 +1,3 @@
+// Supabase project configuration
+export const projectId = "fzbaydtsebbhhqmxnpbt";
+export const publicAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ6YmF5ZHRzZWJiaGhxbXhucGJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwODI0MzYsImV4cCI6MjA3ODY1ODQzNn0.9a6oIzBSZpkIc7m6j4t_ElB_nWEFdZdczlV_n9qD38Y";
